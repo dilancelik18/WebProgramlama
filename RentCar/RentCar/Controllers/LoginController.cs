@@ -1,6 +1,10 @@
-﻿namespace RentCar.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using RentCar.Models;
+using System.Diagnostics;
+
+namespace RentCar.Controllers
 {
-    public class LoginController
+    public class LoginController : Controller 
     {
     }
 }
