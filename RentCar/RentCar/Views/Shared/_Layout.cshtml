@@ -1,58 +1,76 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RentCar</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RentCar.styles.css" asp-append-version="true" />
+<title>Rent A Car Website Template | Home :: w3layouts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/css/slider.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/css/js/jquery.min.js"></script>
+  <script src="~/css/js/responsiveslides.min.js"></script>
+
+  <script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+      // Slideshow 1
+      $("#slider1").responsiveSlides({
+         auto: true,
+		 nav: true,
+		 speed: 500,
+		 namespace: "callbacks",
+      });
+    });
+  </script>
 </head>
 <body>
-    <header>
-        <div class="baslik text-center bg-opacity-10 " >
-            <h1>OTO ARAÇ KİRALAMA SİTESİ</h1>
-        </div>
-        
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RentCar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Rent A Car</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Privacy">Araç Kiralama</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AracKiralamaController" asp-action="Arac">Arac</a>
-                        </li>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - RentCar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+<div class="header">
+<div class="wrap">
+            <div class="logo"><a href="index.html"></a></div>
+   <div class="con-right">
+			<div class="grid1-l-img">
+                    <img src="~/images/contact.png" alt="">
+			</div>
+			<div class="grid1-l-desc">
+				<p>Contact : +91 00000-55555</p>
+			</div>
+			<div class="clear"></div>
+	</div>
+    <div class="clear"></div>
+     </div>
+</div>
+<div class="header-bottom">
+    	<div class="wrap">
+    		<ul id="nav">
+                <li><a href=/Home/Index>Home</a></li>
+                <li><a class="hsubs" href=/Home/Hakkimizda>Hakkimizda</a></li>
+                <li>
+                    <a class="hsubs" href=Home/Arac>Araçlar</a>
+                    <ul class="subs">
+                        <li><a href=/Arac/Arac>Araç-Fiyat Listesi</a></li>
+                        <li><a href="#">Yorumlar</a></li>
+                    </ul>
+                </li>
+                <li><a class="hsubs" href="destinations.html">Free Travel Guides</a></li>
+                <li><a href="contact.html">Giriş Yap</a></li>
+        </ul>
+       </div>
+</div>
+     <div class"content">
+         @RenderBody()
+      	</div>
+<div class="footer-bottom">
+<div class="wrap">	
+	<div class="copy">
+		<p>&copy; 2013 Rent A Car. All Rights Reserved | Design by <a href="http://w3layouts.com">W3Layouts</a></p>
+	</div>
+ </div>
+</div>
 </body>
 </html>
