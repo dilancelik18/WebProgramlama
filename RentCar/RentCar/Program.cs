@@ -1,4 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using RentCar.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("RentCarContextConnection") ?? throw new InvalidOperationException("Connection string 'RentCarContextConnection' not found.");
+
+builder.Services.AddDbContext<RentCarContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<RentCarUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<RentCarContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,6 +27,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
@@ -24,4 +35,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapRazorPages();
 app.Run();
