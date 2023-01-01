@@ -1,14 +1,12 @@
-﻿
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+﻿@using Microsoft.AspNetCore.Identity
+@using RentCar.Areas.Identity.Data
+
+@inject SignInManager<RentCarUser> SignInManager
+@inject UserManager<RentCarUser> UserManager
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Rent A Car Website Template | Home :: w3layouts</title>
+<title>Rent A Car Website Template </title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,18 +14,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="~/css/js/jquery.min.js"></script>
   <script src="~/css/js/responsiveslides.min.js"></script>
 
-  <script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-      // Slideshow 1
-      $("#slider1").responsiveSlides({
-         auto: true,
-		 nav: true,
-		 speed: 500,
-		 namespace: "callbacks",
-      });
-    });
-  </script>
+  
 </head>
 <body>
 <div class="header">
@@ -38,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <img src="~/images/contact.png" alt="">
 			</div>
 			<div class="grid1-l-desc">
-				<p>Contact : +91 00000-55555</p>
+                    <p>>Contact : 05051496522</p>
 			</div>
 			<div class="clear"></div>
 	</div>
@@ -49,26 +36,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     	<div class="wrap">
     		<ul id="nav">
                 <li><a href=/Home/Index>Home</a></li>
-                <li><a class="hsubs" href=/Home/Hakkimizda>Hakkimizda</a></li>
+                <li><a class="hsubs" href=/Hakkimizda/Hakkimizda>Hakkimizda</a></li>
                 <li>
-                    <a class="hsubs" href=Home/Arac>Araçlar</a>
-                    <ul class="subs">
+                  
+                    
                         <li><a href=/Arac/Arac>Araç-Fiyat Listesi</a></li>
-                        <li><a href="#">Yorumlar</a></li>
-                    </ul>
+                        <li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Role Erisim
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Index">Roles</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Manager">Manager</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Admin">Admin</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
+                
+                <li><a href=Ingilizce>İngilizce</a></li>
                 </li>
-                <li><a class="hsubs" href="destinations.html">Free Travel Guides</a></li>
-                <li><a href="contact.html">Giriş Yap</a></li>
+                   
+                </li>
+                
         </ul>
        </div>
+       <partial name = "_LoginPartial" />
 </div>
      <div class"content">
          @RenderBody()
+         @await RenderSectionAsync("Scripts",required:false)
       	</div>
 <div class="footer-bottom">
 <div class="wrap">	
 	<div class="copy">
-		<p>&copy; 2013 Rent A Car. All Rights Reserved | Design by <a href="http://w3layouts.com">W3Layouts</a></p>
+		<p>2013 Rent A Car. All Rights Reserved </a></p>
 	</div>
  </div>
 </div>
