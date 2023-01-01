@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RentCar.Areas.Identity.Data;
+using System.Security.Claims;
+using NuGet.Packaging;
 
 namespace RentCar.Areas.Identity.Pages.Account
 {
@@ -112,7 +114,35 @@ namespace RentCar.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
+                if(user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid Login attempt.");
+                    return Page();
+                }
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
+                if (result.Succeeded)
+                {
+                    var claims = new List<Claim>
+                    {
+                        new Claim("amr","pwd"),
+                       // new Claim("EmployeeNumber","1")
+                    };
+                    var roles = await _signInManager.UserManager.GetRolesAsync(user);
+                    if (roles.Any())
+                    {
+                        var roleClaim = string.Join(",", roles);
+                        claims.Add(new Claim("Roles", roleClaim));
+                    }
+                    
+                    
+                    await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+
+                
                 if (result.Succeeded)
                 {
                    
